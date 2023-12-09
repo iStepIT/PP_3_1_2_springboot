@@ -4,11 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+
 import com.example.PP_3_1_2_springboot.model.User;
 import com.example.PP_3_1_2_springboot.service.UserService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping
@@ -19,9 +24,10 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping(value = "/")
     public String index(Model model) {
-        model.addAttribute("users", userService.index());
+        model.addAttribute("users", userService.getAllUsers());
         return "index";
     }
 
@@ -32,9 +38,9 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user){
-      //  model.addAttribute("user", new User());
-            return "new";
+    public String newUser(@ModelAttribute("user") User user) {
+        //  model.addAttribute("user", new User());
+        return "new";
     }
 
     @PostMapping()
@@ -63,7 +69,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String delete(@RequestParam(value = "id") int id) {
         userService.delete(id);
         return "redirect:/";

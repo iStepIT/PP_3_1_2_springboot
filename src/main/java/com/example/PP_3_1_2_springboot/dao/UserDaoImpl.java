@@ -1,9 +1,10 @@
 package com.example.PP_3_1_2_springboot.dao;
 
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import com.example.PP_3_1_2_springboot.model.User;
 
-import jakarta.persistence.EntityManager;
+
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class UserDaoImpl implements UserDAO {
     }
 
     @Override
-    public List<User> index() {
+    public List<User> getAllUsers() {
         return entityManager.createQuery("FROM User", User.class)
                 .getResultList();
     }

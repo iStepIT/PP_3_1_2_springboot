@@ -1,9 +1,16 @@
 package com.example.PP_3_1_2_springboot.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import jakarta.persistence.*;
+
 import jakarta.validation.constraints.Size;
 import java.util.Objects;
 
@@ -17,22 +24,24 @@ public class User {
     private int id;
 
     @NotEmpty(message = "Имя не может быть пустым")
-    @Size(min = 2, max =30, message = "Имя должно быть от 2 до 30 символов")
+    @Size(min = 2, max = 30, message = "Имя должно быть от 2 до 30 символов")
     @Column(name = "name")
     private String name;
 
-    @NotEmpty (message = "Фамилия не может быть пустая")
-    @Size (min = 2, max =30, message = "Фамилия должна быть от 2 до 30 символов")
+    @NotEmpty(message = "Фамилия не может быть пустая")
+    @Size(min = 2, max = 30, message = "Фамилия должна быть от 2 до 30 символов")
     @Column(name = "lastName")
     private String lastName;
 
-    @NotEmpty (message = "почта не может быть пустая")
+    @NotEmpty(message = "почта не может быть пустая")
     @Email(message = "почта введина не верно")
     @Column(name = "email")
     private String email;
 
-    public User() {}
-    public User( String name, String lastName, String email) {
+    public User() {
+    }
+
+    public User(String name, String lastName, String email) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;

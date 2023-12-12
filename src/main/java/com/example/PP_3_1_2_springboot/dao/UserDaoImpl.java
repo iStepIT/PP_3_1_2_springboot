@@ -25,6 +25,7 @@ public class UserDaoImpl implements UserDAO {
                 .getResultList();
     }
 
+
     @Override
     public User show(int id) {
         User userFind = entityManager.find(User.class, id);
@@ -44,7 +45,7 @@ public class UserDaoImpl implements UserDAO {
     public void update(int id, User user) {
         User userFind = entityManager.find(User.class, id);
         if (userFind == null) {
-            throw new EntityNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден!");
         }
         entityManager.merge(user);
         entityManager.flush();
